@@ -1,0 +1,59 @@
+  Step 1: Launch and Connect to your EC2 Instance
+   1. Launch Instance: In the AWS Console, launch an EC2 instance.
+       * AMI: Ubuntu 22.04 LTS (recommended).
+       * Instance Type: t2.micro (Free Tier).
+       * Security Group: Ensure you allow SSH (22), HTTP (80), and HTTPS (443).
+   2. Connect: Open your terminal and SSH into your instance:
+
+   1     ssh -i "your-key.pem" ubuntu@your-ec2-ip
+
+  Step 2: Install Node.js and Dependencies
+  Update the system and install Node.js:
+   1 sudo apt update
+   2 sudo apt install -y nodejs npm
+
+  Step 3: Deploy the Code
+  Clone your repository or upload your files:
+
+   1 git clone <your-repo-url>
+   2 cd web-app-roster-message-maker
+   3 npm install
+
+  Step 4: Run the App with PM2
+  PM2 is a process manager that keeps your application running in the background and restarts it if it crashes.
+
+   1 sudo npm install -g pm2
+   2 pm2 start main.js --name roster-app
+   3 pm2 save
+   4 pm2 startup # Follow the instructions displayed on your screen to enable auto-restart on boot
+
+  Step 5: Configure Nginx as a Reverse Proxy
+  Nginx will handle incoming traffic on Port 80 and forward it to your Node.js app on Port 3000.
+   1. Install Nginx:
+   1     sudo apt install nginx
+   2. Create Config File:
+   1     sudo nano /etc/nginx/sites-available/roster-app
+   3. Paste the following configuration: (Replace your-domain-or-ip with your EC2 Public IP)
+
+    1     server {
+    2         listen 80;
+    3         server_name your-domain-or-ip;
+    4
+    5         location / {
+    6             proxy_pass http://localhost:3000;
+    7             proxy_http_version 1.1;
+    8             proxy_set_header Upgrade $http_upgrade;
+    9             proxy_set_header Connection 'upgrade';
+   10             proxy_set_header Host $host;
+   11             proxy_cache_bypass $http_upgrade;
+   12         }
+   13     }
+   4. Enable and Restart:
+
+   1     sudo ln -s /etc/nginx/sites-available/roster-app /etc/nginx/sites-enabled/
+   2     sudo rm /etc/nginx/sites-enabled/default # Remove default config
+   3     sudo nginx -t # Test configuration
+   4     sudo systemctl restart nginx
+
+  Step 6: Verify
+  Open your browser and enter your EC2 Public IP address. Your Roster Message Maker should now be live and accessible!

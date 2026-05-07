@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff - Roster Maker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Staff</h1>
+        
+        <div class="controls">
+            <a href="/" class="btn secondary">Back to Roster</a>
+        </div>
+
+        <section class="staff-mgmt-section">
+            <h2>Find Staff to Edit</h2>
+            <div class="input-group">
+                <div class="autocomplete">
+                    <input type="text" id="staffSearch" placeholder="Type name to find staff..." autocomplete="off">
+                    <div id="staffSuggestions" class="suggestions"></div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="formSection">
+            <h2 id="formTitle">Add New Staff</h2>
+            <form id="staffForm">
+                <input type="hidden" id="staffId">
+                <div class="input-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required placeholder="Full Name">
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" required placeholder="Phone Number">
+                </div>
+                <div class="input-group">
+                    <label for="location">Default Location:</label>
+                    <select id="location" required>
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="team">Team:</label>
+                    <select id="team" required>
+                        <option value="">Select Team</option>
+                    </select>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" id="submitBtn" class="btn primary">Add Staff</button>
+                    <button type="button" id="cancelBtn" class="btn secondary" style="display: none;">Cancel Edit</button>
+                    <button type="button" id="deleteBtn" class="btn danger" style="display: none; margin-top: 10px;">Delete Staff</button>
+                </div>
+            </form>
+        </section>
+
+        <div id="statusMessage" style="margin-top: 20px; text-align: center; display: none;"></div>
+    </div>
+    <script src="addStaff.js"></script>
+</body>
+</html>

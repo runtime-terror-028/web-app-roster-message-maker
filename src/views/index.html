@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roster Message Maker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Roster Message Maker</h1>
+        
+        <form id="rosterForm">
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="teamInput">Team:</label>
+                    <div class="autocomplete">
+                        <input type="text" id="teamInput" placeholder="Type team name..." autocomplete="off">
+                        <div id="teamSuggestions" class="suggestions"></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="shiftInput">Shift:</label>
+                    <div class="autocomplete">
+                        <input type="text" id="shiftInput" placeholder="Type shift name..." autocomplete="off">
+                        <div id="shiftSuggestions" class="suggestions"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="staffInput">Staff:</label>
+                    <div class="autocomplete">
+                        <input type="text" id="staffInput" placeholder="Type staff name..." autocomplete="off">
+                        <div id="staffSuggestions" class="suggestions"></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="locationInput">Location:</label>
+                    <div class="autocomplete">
+                        <input type="text" id="locationInput" placeholder="Type location..." autocomplete="off">
+                        <div id="locationSuggestions" class="suggestions"></div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="addBtn" class="btn primary">Add to Roster</button>
+        </form>
+
+        <div class="output-group">
+            <label for="outputMessage">Generated Message Preview:</label>
+            <textarea id="outputMessage" readonly rows="15"></textarea>
+            <button type="button" id="copyBtn" class="btn success">Copy to Clipboard</button>
+        </div>
+
+        <div class="roster-section">
+            <h2>Current Roster</h2>
+            <ul id="rosterList"></ul>
+        </div>
+
+        <div class="controls" style="margin-top: 30px;">
+            <a href="/add-new-staff" class="btn secondary">Add New Staff</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
